@@ -1,0 +1,61 @@
+// Write a program to check whether Array is a subset of another array in C
+#include<stdio.h>
+
+int isSubset(int arr1[], int arr2[], int m, int n)
+{
+   int i = 0, j = 0;
+
+   if (m < n)
+      return 0;
+
+   //Sort array 1
+   for(int i=0; iarr1[j]){
+              int temp = arr1[i];
+              arr1[i] = arr1[j];
+              arr1[j] = temp;
+           }
+       }
+   }
+
+   //Sort array 2
+   for(int i=0; iarr1[j]){
+            int temp = arr2[i];
+            arr2[i] = arr2[j];
+            arr2[j] = temp;
+          }
+       }
+   }
+   // Iterate till they donot exceed their sizes
+   while (i < n && j < m){
+
+      if (arr1[j] < arr2[i]) 
+          j++;
+      else if (arr1[j] == arr2[i]) {
+          j++;
+          i++; 
+      } 
+      
+      else if (arr1[j] > arr2[i])
+         return 0;
+    }
+
+   return (i < n) ? 0 : 1;
+}
+
+
+// Driver code
+int main()
+{
+    int arr1[] = { 11, 10, 13, 21, 30, 70 };
+    int arr2[] = { 11, 30, 70, 10 };
+
+    int m = sizeof(arr1) / sizeof(arr1[0]);
+    int n = sizeof(arr2) / sizeof(arr2[0]);
+
+    if (isSubset(arr1, arr2, m, n))
+         printf("arr2[] is subset of arr1[] ");
+    else
+         printf("arr2[] is not a subset of arr1[]");
+
+   return 0;
+}
